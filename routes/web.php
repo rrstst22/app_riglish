@@ -14,9 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Vue
+Route::get('vue/get-words', [App\Http\Controllers\WordsController::class, 'getWords']);
+Route::post('vue/save-result', [App\Http\Controllers\WordsController::class, 'saveResult']);
+Route::get('vue/create-record', [App\Http\Controllers\WordsController::class, 'createRecord']);
