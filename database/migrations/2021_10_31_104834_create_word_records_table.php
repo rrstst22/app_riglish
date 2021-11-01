@@ -17,6 +17,7 @@ class CreateWordRecordsTable extends Migration
             $table->increments('id');
             $table->integer('word_id')->unsigned();
             $table->integer('record_id')->unsigned();
+            $table->boolean('result')->default(1);
             $table->timestamps();
 
             $table->foreign('word_id')->references('id')->on('words')->onDelete('cascade');

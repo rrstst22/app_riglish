@@ -13,7 +13,7 @@ class WordsController extends Controller
 {
     public function getWords()
     {
-        $words = Word::where('level', 'novice')->inRandomOrder()->take(10)->get();
+        $words = Word::where('level', 'novice')->inRandomOrder()->take(4)->get();
         return $words;
     }
 
@@ -35,7 +35,7 @@ class WordsController extends Controller
             array(
                 'word_id' => $request->word_id,
                 'record_id' => $request->record_id,
-                'result' => $request->result,
+                'result' => $request->result
             )
         );
     }
@@ -44,11 +44,22 @@ class WordsController extends Controller
     {
         Record::where('id', $request->id)->update(
             array(
-                'record->score' => $request->score,
-                'record->date' => Carbon::now(),
+                'score' => $request->score,
+                'date' => Carbon::now(),
             )
         );
         return $request->id; 
+    }
+
+    public function showResult(Request $request)
+    {
+        $words = Word_record::where('record_id', $request->record_id)
+        ->join('words','word_records.word_id','=','words.id')
+        ->join('records','word_records.record_id','=','records.id')
+        ->orderBy('word_records.id')
+        ->get();
+
+        return $words;
     }
 
 }

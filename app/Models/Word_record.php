@@ -12,5 +12,6 @@ class Word_record extends Model
     protected $fillable = [
         'word_id',
         'record_id',
+        'result'
     ];
 }

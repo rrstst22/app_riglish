@@ -6,7 +6,11 @@
 
 require('./bootstrap');
 
+import VueRouter from 'vue-router';
+import router from './router'
+
 window.Vue = require('vue').default;
+Vue.use(VueRouter);
 
 /**
  * The following block of code may be used to automatically register your
@@ -30,14 +34,5 @@ Vue.component('question-component', require('./components/QuestionComponent.vue'
 
 const app = new Vue({
     el: '#app',
-    data () {
-        return {
-          level : "novice",
-        }
-    },
-    methods: {
-        startQuestions: function () {
-
-        }
-    }
+    router: router,
 });

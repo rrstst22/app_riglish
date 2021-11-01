@@ -1,9 +1,9 @@
 <template>
 <div>
-    {{words[question].en}}
+    {{words[question_number].en}}
     <form v-on:submit.prevent>
         <div v-for="(word, index) in words" v-bind:key="index">
-            <label><input type="radio" name="option" v-bind:value=word.id v-model="selected_word_id">{{ word.jp }}、{{word.en}}</label>
+            <label><input type="radio" name="option" v-bind:value=index v-model="selected_index">{{ word.jp }}、{{word.en}}</label>
         </div>  
         <button type='submit' v-on:click="check">OK</button>
     </form>
@@ -20,44 +20,76 @@
         },
         data () {
             return {
-                selected_word_id: "",
-                question: "",
+                record_id: 0,
+                selected_index: "",
+                question_number: 0,
                 words: "",
                 result: "",
+                count: 0,
+                score: 0,
             }
         },
         created() {
-            console.log('Component mounted.');
             this.getWords();
+            this.createRecord();
         },
         methods: {
+            createRecord: function () {
+                var self = this;
+                axios.get('vue/create-record')
+                    .then(function(response){
+                        self.record_id = response.data
+                    }).catch(function(error){
+                        alert(error);
+                });             
+            },
             getWords: function () {
-                var self = this
+                var self = this;
                 axios.get('vue/get-words')
                     .then(function(response){
-                        console.log(response.data);
-                        self.words = response.data;
-                        self.question = Math.floor( Math.random() * 9 );
+                        self.words = response.data,
+                        self.question_number = Math.floor( Math.random() * 3 )
                     }).catch(function(error){
                         alert(error);
                 });             
             },
             check: function () {
-                alert(this.selected_word_id);
-                //this.getWords()
-                if(this.question=this.selected_word_id){
+                console.log(this.count)
+                var self = this;
+                
+                if(this.question_number===this.selected_index){
                     this.result=true;
+                    this.score++
+                    console.log('OK');
                 }else{
                     this.result=false;
+                    console.log('NG');
                 }
+                console.log(this.score)
                 axios.post('vue/save-result', {
+                    word_id: this.words[this.question_number].id,
+                    record_id: this.record_id,
                     result: this.result
                 })
-                    .then(function(response){
-                  
+                    .then(function(response){                          
                     }).catch(function(error){
-                        alert(error);
                 });
+                if(this.count<1){
+                    this.count++ 
+                    this.getWords()
+                }else{
+                    var self = this;
+                    axios.post('vue/update-record', {
+                        id: this.record_id,
+                        score: this.score
+                    })
+                        .then(function(response){
+                        }).catch(function(error){
+                            alert(error);
+                    });    
+                    alert("end");
+                    this.$router.replace({name: "result", params: {record_id: this.record_id}});
+                }
             },
         }
     }
