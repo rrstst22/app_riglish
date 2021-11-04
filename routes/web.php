@@ -25,6 +25,11 @@ Route::get('/result', function () {
     return view('index');
 });
 
+Route::get('/import', function () {
+    return view('importcsv');
+});
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -36,3 +41,6 @@ Route::post('vue/save-result', [App\Http\Controllers\WordsController::class, 'sa
 Route::get('vue/create-record', [App\Http\Controllers\WordsController::class, 'createRecord']);
 Route::post('vue/update-record', [App\Http\Controllers\WordsController::class, 'updateRecord']);
 Route::get('vue/show-result', [App\Http\Controllers\WordsController::class, 'showResult']);
+
+
+Route::post('csv/import', [App\Http\Controllers\CsvImportController::class, 'import']);

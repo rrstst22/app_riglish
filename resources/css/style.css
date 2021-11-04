@@ -1,0 +1,41 @@
+a:hover {
+    text-decoration: underline;
+}
+
+.logo {
+    background: blue;
+    color: green;
+    font-size: 1.5rem;
+    height: 100px;
+}
+
+.logo .aa {
+    padding: 28px;
+}
+
+.controller {
+    position: fixed;
+    left: 0px;
+    padding: 3px;
+    background: black;
+    opacity: .4;
+}
+
+.icon {
+    padding: 20px 5px;
+}
+
+.index {
+    background: #fff;
+    padding: 10px;
+}
+.index li {
+    margin: 10px 0;
+}
+.footer{
+    background: black;
+    height: 50px;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+}

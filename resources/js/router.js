@@ -1,5 +1,6 @@
 import Router from 'vue-router';
 import home from "./components/HomeComponent.vue";
+import countdown from "./components/CountDownComponent.vue";
 import question from "./components/QuestionComponent.vue";
 import result from "./components/ResultComponent.vue";
 
@@ -13,9 +14,16 @@ export default new Router({
             component: home,
         },
         {
+            path: "/riglish/public/countdown",
+            name: "countdown",
+            component: countdown,
+            props: true
+        },
+        {
             path: "/riglish/public/question",
             name: "question",
             component: question,
+            props: true
         },
         {
             path: "/riglish/public/result",

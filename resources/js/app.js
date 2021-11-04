@@ -25,6 +25,8 @@ Vue.use(VueRouter);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('question-component', require('./components/QuestionComponent.vue').default);
+Vue.component('home-component', require('./components/HomeComponent.vue').default);
+Vue.component('countdown-component', require('./components/CountDownComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
