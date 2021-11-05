@@ -20,11 +20,15 @@
 </head>
 <body>
     <div id="app">
-        <div class="logo text-center">
-            <div class="aa"><a href="{{ url('/') }}">Webエンジニアへの道</a></div>
+        <div class="logo-box text-center">
+            <div class="logo"><a href="{{ url('/') }}">Webエンジニアへの道</a></div>
         </div>
 
-        <div class="controller border-right">
+        <div class="arrow" v-on:click='on_arrow=!on_arrow'>
+            <i class="fas fa-chevron-right"></i>
+        </div>
+
+        <div class="controller border-right" v-bind:class='{onarrow:on_arrow}'>
             <div class="icon"><a href="./"><i class="fas fa-home fa-3x"></i></a></div>
             <div class="icon"><i class="fab fa-twitter fa-3x"></i></div>
             <div class="icon"><a href="import"><i class="fas fa-user-lock fa-3x"></i></a></div>

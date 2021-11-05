@@ -1,24 +1,24 @@
-a:hover {
-    text-decoration: underline;
-}
-
-.logo {
+.logo-box {
     background: blue;
     color: green;
     font-size: 1.5rem;
     height: 100px;
 }
 
-.logo .aa {
+.logo {
     padding: 28px;
 }
 
 .controller {
     position: fixed;
     left: 0px;
+    top: 150px;
     padding: 3px;
     background: black;
     opacity: .4;
+    transition: 1s;
+    font-size: .8rem;
+    padding: 15px;
 }
 
 .icon {
@@ -38,4 +38,27 @@ a:hover {
     position: fixed;
     bottom: 0px;
     width: 100%;
+}
+.arrow {
+    transform: translateX(-100px);
+    transition: transform 1s;
+    position: fixed;
+    top: 11px;
+    left: 0px;
+    background: black;
+    color: white;
+    font-size: 2rem; 
+    padding: 10px;
+    cursor: pointer;
+}
+
+@media (max-width: 770px) {
+    .onarrow {
+        transform: translateX(-100px);
+        transition: transform 1s;
+    }
+    .arrow {
+        transform: translateX(0px);
+        transition: transform 1s;
+    }
 }

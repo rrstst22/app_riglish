@@ -37,4 +37,9 @@ Vue.component('countdown-component', require('./components/CountDownComponent.vu
 const app = new Vue({
     el: '#app',
     router: router,
+    data() {
+        return {
+            on_arrow: true
+        }
+    }
 });

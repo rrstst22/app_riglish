@@ -2491,7 +2491,12 @@ Vue.component('countdown-component', __webpack_require__(/*! ./components/CountD
 
 var app = new Vue({
   el: '#app',
-  router: _router__WEBPACK_IMPORTED_MODULE_0__["default"]
+  router: _router__WEBPACK_IMPORTED_MODULE_0__["default"],
+  data: function data() {
+    return {
+      on_arrow: true
+    };
+  }
 });
 
 /***/ }),
@@ -7018,7 +7023,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.question[data-v-6c531d5c] {\n    position: relative;\n}\n.hover[data-v-6c531d5c]:hover {\n\tbox-shadow: 0 15px 30px -5px rgba(0,0,0,.15), 0 0 5px rgba(0,0,0,.1);\n\ttransform: translateY(-4px);\n    background: #fff;\n}\n.question-box[data-v-6c531d5c] {\n    background: #fff;\n    height: 350px;\n    padding: 10px;\n}\n.count[data-v-6c531d5c] {\n    background: #ec4646;\n    border-radius: 50%;\n    width: 50px;\n    height: 50px;\n    color: #fff;\n    font-size: 30px;\n    text-align: center;\n    line-height: 50px;\n    position: absolute;\n    top: -5px;\n    right: 30px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.question[data-v-6c531d5c] {\n    position: relative;\n}\n.hover[data-v-6c531d5c]:hover {\n\tbox-shadow: 0 15px 30px -5px rgba(0,0,0,.15), 0 0 5px rgba(0,0,0,.1);\n\ttransform: translateY(-4px);\n    background: #fff;\n}\n.question-box[data-v-6c531d5c] {\n    background: #fff;\n    padding: 10px;\n}\n.count[data-v-6c531d5c] {\n    background: #ec4646;\n    border-radius: 50%;\n    width: 50px;\n    height: 50px;\n    color: #fff;\n    font-size: 30px;\n    text-align: center;\n    line-height: 50px;\n    position: absolute;\n    top: -5px;\n    right: 30px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

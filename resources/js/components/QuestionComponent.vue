@@ -142,7 +142,6 @@
 }
 .question-box {
     background: #fff;
-    height: 350px;
     padding: 10px;
 }
 .count {
