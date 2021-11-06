@@ -4,8 +4,9 @@
         <div class="text-center">
             <h1>結果</h1>
         </div>
-        <div>
-            <!-- {{word[0].date}} -->
+        <div class="text-right my-2">
+            <!-- yyyyMMMdd hhmmのみ表示 -->
+            {{words[0].date.substr(0, 16)}}
         </div>
         <table>
             <tr class="heading">
@@ -13,6 +14,7 @@
                 <th>日本語</th>
                 <th>正誤</th>
             </tr>
+            <!-- レコード内容出力 -->
             <tr v-for="(word, index) in words" v-bind:key="index" class="score-list">
                 <td>{{word.en}}</td><td>{{word.jp}}</td><td>{{word.result}}</td>
             </tr>     
@@ -32,7 +34,7 @@
         data () {
             return {
                 words: {
-                    0: {en: "", jp: "", result: "", score: 0}
+                    0: {en: "", jp: "", result: "", score: 0, date: "　"}
                 },
             }
         },
@@ -41,9 +43,10 @@
             window.addEventListener("beforeunload", this.confirmSave);
         },
         methods: {
+            //結果を取得
             showResult: function () {
                 var self = this;
-                axios.get('vue/show-result', {
+                axios.get('vue/show-record', {
                     params:{record_id: this.record_id}
                 })
                     .then(function(response){
@@ -52,21 +55,23 @@
                         alert(error);
                 });    
             },
+            //途中退出処理
             confirmSave (event) {
-                event.returnValue = "編集中のものは保存されませんが、よろしいですか？";
+                event.returnValue = "このページを再度見ることはできません。離れますか？";
             },
         },
+        //退出処理
         destroyed() {
             window.removeEventListener("beforeunload", this.confirmSave);
-            clearTimeout(this.update_timer);
         },
+        //途中退出処理
         beforeRouteLeave (to, from, next) {
             const answer = window.confirm("このページを再度見ることはできません。離れますか？")
             if (answer) {
                 clearTimeout(this.update_timer);
-                next()
+                next();
             } else {
-                next(false)
+                next(false);
             }
         },
     }

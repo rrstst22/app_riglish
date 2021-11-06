@@ -51,13 +51,13 @@ class WordsController extends Controller
         Record::where('id', $request->id)->update(
             array(
                 'score' => $request->score,
-                'date' => Carbon::now(),
+                'date' => Carbon::now()
             )
         );
         return $request->id; 
     }
 
-    public function showResult(Request $request)
+    public function showRecord(Request $request)
     {
         $words = Word_record::where('record_id', $request->record_id)
         ->join('words','word_records.word_id','=','words.id')

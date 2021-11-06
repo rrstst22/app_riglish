@@ -2083,7 +2083,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     level: {
@@ -2092,9 +2091,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
+    //3秒後に画面遷移をセット
     window.setTimeout(this.startQuestions, 3000);
   },
   methods: {
+    //クエスチョン画面へ遷移
     startQuestions: function startQuestions() {
       this.$router.push({
         name: "question",
@@ -2185,7 +2186,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2193,6 +2193,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    //カウントダウン画面へ遷移
     startQuestions: function startQuestions(selected_level) {
       this.$router.push({
         name: "countdown",
@@ -2251,18 +2252,22 @@ __webpack_require__.r(__webpack_exports__);
         }
       },
       result: "",
-      count: 0,
+      step: 0,
       score: 0,
       timer: 5,
       update_timer: null
     };
   },
   mounted: function mounted() {
-    window.addEventListener("beforeunload", this.handler);
-    this.getWords();
+    //途中退出処理
+    window.addEventListener("beforeunload", this.handler); //問題取得
+
+    this.getWords(); //レコード表作成
+
     this.createRecord();
   },
   methods: {
+    //レコード表作成
     createRecord: function createRecord() {
       var self = this;
       axios.get('vue/create-record').then(function (response) {
@@ -2271,29 +2276,36 @@ __webpack_require__.r(__webpack_exports__);
         alert(error);
       });
     },
+    //問題を取得
     getWords: function getWords() {
-      this.timer = 5;
+      //タイマーを5秒にセット
+      this.timer = 5; //10問繰り返す、10問答えたら画面遷移
 
-      if (this.count < 3) {
-        var self = this;
+      if (this.step < 3) {
+        var self = this; //新しい問題を取得
+
         axios.get('vue/get-words', {
           params: {
             level: this.level
           }
         }).then(function (response) {
-          self.words = response.data, self.question_number = Math.floor(Math.random() * 3);
-          window.setTimeout(self.countDown, 1);
+          self.words = response.data;
+          self.question_number = Math.floor(Math.random() * 3); //出題問題をランダムに選択
+
+          window.setTimeout(self.countDown, 1); //実行を遅延させないとなぜか動かない（確認ポイント）
         })["catch"](function (error) {
           alert(error);
         });
       } else {
+        //成績をレコードに反映
         axios.post('vue/update-record', {
           id: this.record_id,
           score: this.score
         }).then(function (response) {})["catch"](function (error) {
           alert(error);
         });
-        alert("end");
+        alert("お疲れ様です。\n結果を表示します。"); //結果画面へ遷移
+
         this.$router.replace({
           name: "result",
           params: {
@@ -2302,17 +2314,20 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
+    //正誤チェック
     check: function check(index) {
+      //タイマーリセット（カウントダウン）
       clearTimeout(this.update_timer);
-      this.count++;
-      var self = this;
+      this.step++;
+      var self = this; //正誤判定
 
       if (this.question_number === index) {
         this.result = "○";
         this.score++;
       } else {
         this.result = "×";
-      }
+      } //結果送信
+
 
       axios.post('vue/save-result', {
         word_id: this.words[this.question_number].id,
@@ -2320,26 +2335,32 @@ __webpack_require__.r(__webpack_exports__);
         result: this.result
       }).then(function (response) {})["catch"](function (error) {});
     },
+    //カウントダウン
     countDown: function countDown() {
+      //タイマーが0以上の時、1ずつ減らしていく
       if (this.timer > 0) {
         document.getElementById("sec").textContent = String(this.timer);
         this.timer--;
         this.update_timer = window.setTimeout(this.countDown, 1000);
       } else {
+        //タイムアウト
         this.check();
         this.getWords();
       }
     },
+    //途中退出処理
     handler: function handler(event) {
-      event.returnValue = "Data you've inputted won't be synced";
+      event.returnValue = "現在のテストは無効となりますが、よろしいですか？";
     }
   },
+  //退出時にタイマー停止&途中退出処理
   destroyed: function destroyed() {
     clearTimeout(this.update_timer);
     window.removeEventListener("beforeunload", this.handler);
   },
+  //途中退出処理
   beforeRouteLeave: function beforeRouteLeave(to, from, next) {
-    if (this.count < 3) {
+    if (this.step < 3) {
       var answer = window.confirm("現在のテストは無効となりますが、よろしいですか？");
 
       if (answer) {
@@ -2390,6 +2411,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     record_id: {
@@ -2404,7 +2427,8 @@ __webpack_require__.r(__webpack_exports__);
           en: "",
           jp: "",
           result: "",
-          score: 0
+          score: 0,
+          date: "　"
         }
       }
     };
@@ -2414,9 +2438,10 @@ __webpack_require__.r(__webpack_exports__);
     window.addEventListener("beforeunload", this.confirmSave);
   },
   methods: {
+    //結果を取得
     showResult: function showResult() {
       var self = this;
-      axios.get('vue/show-result', {
+      axios.get('vue/show-record', {
         params: {
           record_id: this.record_id
         }
@@ -2426,14 +2451,16 @@ __webpack_require__.r(__webpack_exports__);
         alert(error);
       });
     },
+    //途中退出処理
     confirmSave: function confirmSave(event) {
-      event.returnValue = "編集中のものは保存されませんが、よろしいですか？";
+      event.returnValue = "このページを再度見ることはできません。離れますか？";
     }
   },
+  //退出処理
   destroyed: function destroyed() {
     window.removeEventListener("beforeunload", this.confirmSave);
-    clearTimeout(this.update_timer);
   },
+  //途中退出処理
   beforeRouteLeave: function beforeRouteLeave(to, from, next) {
     var answer = window.confirm("このページを再度見ることはできません。離れますか？");
 
@@ -6975,7 +7002,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nbody[data-v-07289d52]{\n  margin: 0;\n  padding: 0;\n}\np[data-v-07289d52]{\npadding: 10px;\n}\n.container[data-v-07289d52]{\n  position:relative;\n  width: 100%;\n  height: 350px;\n  background: white;\n  overflow: hidden;\n  -webkit-animation: black-out 1s 10s linear;\n          animation: black-out 1s 10s linear;\n}\n\n/* count */\n.count p[data-v-07289d52]{\n  position: absolute;\n  top: 100px;\n  left: 50%;\n  transform: translateX(-50%);\n  -webkit-transform: translateX(-50%);\n  margin: 0;\n  padding: 0;\n  color: black;\n  font-size: 100px;\n  font-weight: bold;\n  opacity:0;\n}\n.count p[data-v-07289d52]:nth-child(1) {\n  -webkit-animation: count-down-data-v-07289d52 1s 0s;\n          animation: count-down-data-v-07289d52 1s 0s;\n}\n.count p[data-v-07289d52]:nth-child(2) {\n  -webkit-animation: count-down-data-v-07289d52 1s 1s;\n          animation: count-down-data-v-07289d52 1s 1s;\n}\n.count p[data-v-07289d52]:nth-child(3) {\n  -webkit-animation: count-down-data-v-07289d52 1s 2s;\n          animation: count-down-data-v-07289d52 1s 2s;\n}\n@-webkit-keyframes count-down-data-v-07289d52 {\n0%,100% {opacity:1;}\n}\n@keyframes count-down-data-v-07289d52 {\n0%,100% {opacity:1;}\n}\n\n\n/* circle */\n.circle[data-v-07289d52]{\n  position: absolute;\n  top: 100px;\n  left: 50%;\n  transform: translateX(-50%);\n  -webkit-transform: translateX(-50%);\n  width: 160px;\n  height: 160px;\n  border: double 15px #a0a0a0;\n  border-radius: 50%;\n}\n\n/* rotation */\n.rotation[data-v-07289d52] {\n\tposition: absolute;\n\ttop: 50%;\n\tleft: 50%;\n\ttransform: translate(-50%,-50%);\n\t-webkit-transform: translate(-50%,-50%);\n\tbox-sizing: border-box;\n\twidth: 1500px;\n\theight: 1500px;\n\tborder-radius: 50%;\n\tbackground: #fff;\n\tbackground-image: linear-gradient(to right, #dcdcdc 50%, transparent 0);\n}\n.rotation[data-v-07289d52]::before{ \n\tcontent: '';\n\tdisplay: block;\n\tmargin-left: 50%;\n\theight: 100%;\n\tborder-radius: 0 100% 100% 0 / 50%;\n\tbackground-color: inherit;\n\ttransform-origin: left;\n\tbackground: #dcdcdc;\n\ttransform: rotate(0turn);\n\t-webkit-animation: rotation1-data-v-07289d52 .5s linear 20,rotation2-data-v-07289d52 1s step-end 10;\n\t        animation: rotation1-data-v-07289d52 .5s linear 20,rotation2-data-v-07289d52 1s step-end 10;\n}\n@-webkit-keyframes rotation1-data-v-07289d52 {\n0% { transform: rotate(0deg);\n}\n100% { transform: rotate(180deg);\n}\n}\n@keyframes rotation1-data-v-07289d52 {\n0% { transform: rotate(0deg);\n}\n100% { transform: rotate(180deg);\n}\n}\n@-webkit-keyframes rotation2-data-v-07289d52 {\n0% { background: #dcdcdc;\n}\n50% { background: #fff;\n}\n}\n@keyframes rotation2-data-v-07289d52 {\n0% { background: #dcdcdc;\n}\n50% { background: #fff;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nbody[data-v-07289d52]{\n    margin: 0;\n    padding: 0;\n}\np[data-v-07289d52]{\n    padding: 10px;\n}\n.container[data-v-07289d52]{\n    position:relative;\n    width: 100%;\n    height: 350px;\n    background: white;\n    overflow: hidden;\n    -webkit-animation: black-out 1s 10s linear;\n            animation: black-out 1s 10s linear;\n}\n.count p[data-v-07289d52]{\n    position: absolute;\n    top: 100px;\n    left: 50%;\n    transform: translateX(-50%);\n    -webkit-transform: translateX(-50%);\n    margin: 0;\n    padding: 0;\n    color: black;\n    font-size: 100px;\n    font-weight: bold;\n    opacity:0;\n}\n.count p[data-v-07289d52]:nth-child(1) {\n    -webkit-animation: count-down-data-v-07289d52 1s 0s;\n            animation: count-down-data-v-07289d52 1s 0s;\n}\n.count p[data-v-07289d52]:nth-child(2) {\n    -webkit-animation: count-down-data-v-07289d52 1s 1s;\n            animation: count-down-data-v-07289d52 1s 1s;\n}\n.count p[data-v-07289d52]:nth-child(3) {\n    -webkit-animation: count-down-data-v-07289d52 1s 2s;\n            animation: count-down-data-v-07289d52 1s 2s;\n}\n@-webkit-keyframes count-down-data-v-07289d52 {\n0%,100% {opacity:1;}\n}\n@keyframes count-down-data-v-07289d52 {\n0%,100% {opacity:1;}\n}\n.circle[data-v-07289d52]{\n    position: absolute;\n    top: 100px;\n    left: 50%;\n    transform: translateX(-50%);\n    -webkit-transform: translateX(-50%);\n    width: 160px;\n    height: 160px;\n    border: double 15px #a0a0a0;\n    border-radius: 50%;\n}\n.rotation[data-v-07289d52] {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%,-50%);\n    -webkit-transform: translate(-50%,-50%);\n    box-sizing: border-box;\n    width: 1500px;\n    height: 1500px;\n    border-radius: 50%;\n    background: #fff;\n    background-image: linear-gradient(to right, #dcdcdc 50%, transparent 0);\n}\n.rotation[data-v-07289d52]::before{ \n    content: '';\n    display: block;\n    margin-left: 50%;\n    height: 100%;\n    border-radius: 0 100% 100% 0 / 50%;\n    background-color: inherit;\n    transform-origin: left;\n    background: #dcdcdc;\n    transform: rotate(0turn);\n    -webkit-animation: rotation1-data-v-07289d52 .5s linear 20,rotation2-data-v-07289d52 1s step-end 10;\n            animation: rotation1-data-v-07289d52 .5s linear 20,rotation2-data-v-07289d52 1s step-end 10;\n}\n@-webkit-keyframes rotation1-data-v-07289d52 {\n0% { transform: rotate(0deg);\n}\n100% { transform: rotate(180deg);\n}\n}\n@keyframes rotation1-data-v-07289d52 {\n0% { transform: rotate(0deg);\n}\n100% { transform: rotate(180deg);\n}\n}\n@-webkit-keyframes rotation2-data-v-07289d52 {\n0% { background: #dcdcdc;\n}\n50% { background: #fff;\n}\n}\n@keyframes rotation2-data-v-07289d52 {\n0% { background: #dcdcdc;\n}\n50% { background: #fff;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -6999,7 +7026,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.hover[data-v-782dcf83] {\n    border-radius: 20px;\n    height: 350px;\n    position: relative;\n}\n.start-button[data-v-782dcf83] {\n    position: absolute;\n    bottom: 20px;\n    left: 40%;\n}\n.hover[data-v-782dcf83]:hover {\n\tbox-shadow: 0 15px 30px -5px rgba(0,0,0,.15), 0 0 5px rgba(0,0,0,.1);\n\ttransform: translateY(-4px);\n}\n.novice[data-v-782dcf83] {\n    background: #eafff4;\n    border: 1px solid #7fffbf;\n}\n.intermediate[data-v-782dcf83] {\n    background: #fff4ea;\n    border: 1px solid #ffbf7f;\n}\n.advanced[data-v-782dcf83] {\n    background: #ffeaf4;\n    border: 1px solid #ff7fbf;\n}\n.level-box[data-v-782dcf83] {\n    background: #fff;\n    padding: 30px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.level[data-v-782dcf83] {\n    border-radius: 20px;\n    position: relative;\n}\n.start-button[data-v-782dcf83] {\n    margin: 40px 0px;\n}\n.level[data-v-782dcf83]:hover {\n\tbox-shadow: 0 15px 30px -5px rgba(0,0,0,.15), 0 0 5px rgba(0,0,0,.1);\n\ttransform: translateY(-4px);\n}\n.novice[data-v-782dcf83] {\n    background: #eafff4;\n    border: 1px solid #7fffbf;\n}\n.intermediate[data-v-782dcf83] {\n    background: #fff4ea;\n    border: 1px solid #ffbf7f;\n}\n.advanced[data-v-782dcf83] {\n    background: #ffeaf4;\n    border: 1px solid #ff7fbf;\n}\n.level-box[data-v-782dcf83] {\n    background: #fff;\n    padding: 30px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7023,7 +7050,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.question[data-v-6c531d5c] {\n    position: relative;\n}\n.hover[data-v-6c531d5c]:hover {\n\tbox-shadow: 0 15px 30px -5px rgba(0,0,0,.15), 0 0 5px rgba(0,0,0,.1);\n\ttransform: translateY(-4px);\n    background: #fff;\n}\n.question-box[data-v-6c531d5c] {\n    background: #fff;\n    padding: 10px;\n}\n.count[data-v-6c531d5c] {\n    background: #ec4646;\n    border-radius: 50%;\n    width: 50px;\n    height: 50px;\n    color: #fff;\n    font-size: 30px;\n    text-align: center;\n    line-height: 50px;\n    position: absolute;\n    top: -5px;\n    right: 30px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.q-section[data-v-6c531d5c] {\n    position: relative;\n}\n.timer[data-v-6c531d5c] {\n    background: #ec4646;\n    border-radius: 50%;\n    width: 50px;\n    height: 50px;\n    color: #fff;\n    font-size: 30px;\n    text-align: center;\n    line-height: 50px;\n    position: absolute;\n    top: -5px;\n    right: 30px;\n}\n.question-box[data-v-6c531d5c] {\n    background: #fff;\n    padding: 10px;\n}\n.question[data-v-6c531d5c] {\n    text-align: center;\n    border: 1px solid;\n    padding: 40px 0px;\n}\n.question[data-v-6c531d5c]:hover {\n\tbox-shadow: 0 15px 30px -5px rgba(0,0,0,.15), 0 0 5px rgba(0,0,0,.1);\n\ttransform: translateY(-4px);\n    background: #fff;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38937,10 +38964,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("div", { staticClass: "circle" }),
         _vm._v(" "),
-        _c("div", { staticClass: "line1" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "line2" }),
-        _vm._v(" "),
         _c("div", { staticClass: "count" }, [
           _c("p", [_vm._v("3")]),
           _vm._v(" "),
@@ -39026,7 +39049,7 @@ var render = function () {
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-4 hover novice text-center" }, [
+      _c("div", { staticClass: "col-md-4 level novice text-center" }, [
         _c("h2", { staticClass: "my-4" }, [_vm._v("初級")]),
         _vm._v(" "),
         _c("div", { staticClass: "my-4" }, [
@@ -39038,7 +39061,7 @@ var render = function () {
         _c(
           "button",
           {
-            staticClass: "my-4 start-button",
+            staticClass: "start-button",
             attrs: { type: "button" },
             on: {
               click: function ($event) {
@@ -39050,7 +39073,7 @@ var render = function () {
         ),
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-4 hover intermediate text-center" }, [
+      _c("div", { staticClass: "col-md-4 level intermediate text-center" }, [
         _c("h2", { staticClass: "my-4" }, [_vm._v("中級")]),
         _vm._v(" "),
         _c("div", { staticClass: "my-4" }, [
@@ -39062,7 +39085,7 @@ var render = function () {
         _c(
           "button",
           {
-            staticClass: "my-4 start-button",
+            staticClass: "start-button",
             attrs: { type: "button" },
             on: {
               click: function ($event) {
@@ -39074,7 +39097,7 @@ var render = function () {
         ),
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-4 hover advanced text-center" }, [
+      _c("div", { staticClass: "col-md-4 level advanced text-center" }, [
         _c("h2", { staticClass: "my-4" }, [_vm._v("上級")]),
         _vm._v(" "),
         _c("div", { staticClass: "my-4" }, [
@@ -39086,7 +39109,7 @@ var render = function () {
         _c(
           "button",
           {
-            staticClass: "my-4 start-button",
+            staticClass: "start-button",
             attrs: { type: "button" },
             on: {
               click: function ($event) {
@@ -39132,7 +39155,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "question" }, [
+  return _c("div", { staticClass: "q-section" }, [
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "text-center my-4" }, [
@@ -39147,7 +39170,7 @@ var render = function () {
           "div",
           {
             key: index,
-            staticClass: "col-md-4 hover text-center py-4 border",
+            staticClass: "col-md-4 question",
             on: {
               click: function ($event) {
                 _vm.check(index)
@@ -39171,7 +39194,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "count" }, [
+    return _c("div", { staticClass: "timer" }, [
       _c("span", { attrs: { id: "sec" } }),
     ])
   },
@@ -39202,7 +39225,13 @@ var render = function () {
     _c("div", { staticClass: "score-sheet" }, [
       _vm._m(0),
       _vm._v(" "),
-      _c("div"),
+      _c("div", { staticClass: "text-right my-2" }, [
+        _vm._v(
+          "\n            " +
+            _vm._s(_vm.words[0].date.substr(0, 16)) +
+            "\n        "
+        ),
+      ]),
       _vm._v(" "),
       _c(
         "table",

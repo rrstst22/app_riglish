@@ -28,10 +28,10 @@
             <i class="fas fa-chevron-right"></i>
         </div>
 
-        <div class="controller border-right" v-bind:class='{onarrow:on_arrow}'>
-            <div class="icon"><a href="./"><i class="fas fa-home fa-3x"></i></a></div>
-            <div class="icon"><i class="fab fa-twitter fa-3x"></i></div>
-            <div class="icon"><a href="import"><i class="fas fa-user-lock fa-3x"></i></a></div>
+        <div class="controller" v-bind:class='{onarrow:on_arrow}'>
+            <div class="icon"><a href="./"><i class="fas fa-home"></i></a></div>
+            <div class="icon"><i class="fab fa-twitter"></i></div>
+            <div class="icon"><a href="import"><i class="fas fa-user-lock"></i></a></div>
         </div>
         
         <main class="py-4">
