@@ -6,7 +6,11 @@
 
 require('./bootstrap');
 
+import VueRouter from 'vue-router';
+import router from './router'
+
 window.Vue = require('vue').default;
+Vue.use(VueRouter);
 
 /**
  * The following block of code may be used to automatically register your
@@ -20,6 +24,9 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('question-component', require('./components/QuestionComponent.vue').default);
+Vue.component('home-component', require('./components/HomeComponent.vue').default);
+Vue.component('countdown-component', require('./components/CountDownComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,4 +36,10 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    router: router,
+    data() {
+        return {
+            on_arrow: true
+        }
+    }
 });
