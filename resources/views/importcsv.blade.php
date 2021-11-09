@@ -4,9 +4,13 @@
 <h4 class="my-4">CSVファイルを選択してください</h4>
 
 <div class="my-4">
-    <p>■手順</p>
-    <p>1. CSVで保存します。</p>
-    <p>2. ファイルを選択し読み込んでください。</p>
+    <p>CSVで単語集を読み込みます。<br>
+    一行目は以下の例のようにカラム名とする。</p>
+
+    <p>例：</p>
+    <p>en,jp,level,frequency,reputation<br>
+    good,よい,novice,high,0<br>
+    bad,悪い,novice,high,0</p>
 </div>
 
 <div class="my-4">
