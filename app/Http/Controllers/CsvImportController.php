@@ -36,8 +36,8 @@ class CsvImportController extends Controller
                 $csvimport_array = [
                     'en' => $row[0], 
                     'jp' => $row[1], 
-                    'level' => $row[2], 
-                    'frequency' => $row[3],
+                    'level_id' => $row[2], 
+                    'frequency_id' => $row[3],
                     'reputation' => $row[4]
                 ];
 

@@ -16,8 +16,8 @@ class WordFactory extends Factory
         return [
             'en' => $this->faker->word,
             'jp' => 'テスト',
-            'level' => 'novice',
-            'frequency' => 'high',
+            'level_id' => 1,
+            'frequency_id' => 1,
         ];
     }
 }

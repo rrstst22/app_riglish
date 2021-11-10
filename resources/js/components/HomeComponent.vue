@@ -9,21 +9,21 @@
             <div class="my-4">
                 中高で習う英単語を出題します。
             </div>
-            <button type="button" class="start-button" v-on:click="startQuestions('novice')">選択</button>
+            <button type="button" class="start-button" v-on:click="startQuestions(1)">選択</button>
         </div>
         <div class="col-md-4 level intermediate text-center">
             <h2 class="my-4">中級</h2>
             <div class="my-4">
                 高校、大学で習う英単語を出題します。
             </div>
-            <button type="button" class="start-button" v-on:click="startQuestions('intermediate')">選択</button>
+            <button type="button" class="start-button" v-on:click="startQuestions(2)">選択</button>
         </div>
         <div class="col-md-4 level advanced text-center">
             <h2 class="my-4">上級</h2>
             <div class="my-4">
                 専門的な英単語などを出題します。
             </div> 
-            <button type="button" class="start-button" v-on:click="startQuestions('advanced')">選択</button>
+            <button type="button" class="start-button" v-on:click="startQuestions(3)">選択</button>
         </div>
     </div>
 
@@ -33,13 +33,13 @@
     export default {
         data () {
             return {
-            selected_level : "",
+                selected_level : 0,
             }
         },
         methods: {
             //カウントダウン画面へ遷移
             startQuestions: function (selected_level) {
-                this.$router.push({name: "countdown", params: {level: selected_level}});
+                this.$router.push({name: "countdown", params: {level_id: selected_level}});
             }
         }
     }

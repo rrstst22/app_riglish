@@ -19,9 +19,9 @@
 <script>
     export default {
         props: {
-            level: {
-                type: String,
-                default: "novice",
+            level_id: {
+                type: Number,
+                default: 1,
             },
         },
         created() {
@@ -31,7 +31,7 @@
         methods: {
             //クエスチョン画面へ遷移
             startQuestions: function () {
-                this.$router.push({name: "question", params: {level: this.level}});
+                this.$router.push({name: "question", params: {level_id: this.level_id}});
             }
         }
     }

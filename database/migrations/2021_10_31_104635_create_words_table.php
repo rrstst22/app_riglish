@@ -17,10 +17,15 @@ class CreateWordsTable extends Migration
             $table->increments('id');
             $table->string('en');
             $table->string('jp');
-            $table->string('level');
-            $table->string('frequency');
+            $table->integer('level_id')->unsigned();
+            $table->integer('frequency_id')->unsigned();
             $table->integer('reputation')->default(0);
             $table->timestamps();
+
+            $table->foreign('level_id')->references('id')->on('levels');
+            $table->foreign('frequency_id')->references('id')->on('frequencies');
+
+
         });
     }
 

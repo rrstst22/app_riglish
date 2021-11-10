@@ -46,7 +46,7 @@
             //結果を取得
             showResult: function () {
                 var self = this;
-                axios.get('vue/show-record', {
+                axios.get("vue/show-record", {
                     params:{record_id: this.record_id}
                 })
                     .then(function(response){
@@ -88,7 +88,6 @@ ul {
 .score-list {
     margin: 50px 0px;
     border-bottom: 1px solid black;
-    font-size: 1.3rem;
 }
 table {
   border-collapse: collapse;

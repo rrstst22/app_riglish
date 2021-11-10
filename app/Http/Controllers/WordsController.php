@@ -11,15 +11,10 @@ use DateTime;
 
 class WordsController extends Controller
 {
-    public function index(Request $request)
-    {
-        $level = $request->level;
-        return view('question', compact('level'));
-    }
 
     public function getWords(Request $request)
     {
-        $words = Word::where('level', $request->level)->inRandomOrder()->take(6)->get();
+        $words = Word::where('level_id', $request->level_id)->inRandomOrder()->take(6)->get();
         return $words;
     }
 

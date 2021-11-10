@@ -9,7 +9,6 @@
     <div class="row question-box">
         <div v-for="(word, index) in words" v-bind:key="index" class="col-md-4 question" v-on:click="check(index); getWords()">
             <div>{{ word.jp }}</div>
-            <div>{{ word.en }}</div>
         </div>
     </div>
 </div>
@@ -18,9 +17,9 @@
 <script>
     export default {
         props: {
-            level: {
-                type: String,
-                default: "novice",
+            level_id: {
+                type: Number,
+                default: 1,
             },
         },
         data () {
@@ -31,7 +30,7 @@
                     0: {en: "　"}
                 },
                 result: "",
-                step: 0,
+                step: 0, //何問目？
                 score: 0,
                 timer: 5,
                 update_timer: null,
@@ -65,7 +64,7 @@
                     var self = this;
                     //新しい問題を取得
                     axios.get('vue/get-words', {
-                        params:{level: this.level}
+                        params:{level_id: this.level_id}
                     })
                         .then(function(response){
                             self.words = response.data;
@@ -174,12 +173,17 @@
 }
 .question {
     text-align: center;
-    border: 1px solid;
-    padding: 40px 0px; 
+    border: 1px solid #d3d3d3;
+    padding: 50px 0px; 
 }
 .question:hover {
 	box-shadow: 0 15px 30px -5px rgba(0,0,0,.15), 0 0 5px rgba(0,0,0,.1);
 	transform: translateY(-4px);
     background: #fff;
+}
+@media (max-width: 770px) {
+    .question {
+        padding: 20px 0px; 
+    }
 }
 </style>

@@ -9,8 +9,16 @@
 
     <p>例：</p>
     <p>en,jp,level,frequency,reputation<br>
-    good,よい,novice,high,0<br>
-    bad,悪い,novice,high,0</p>
+    good,よい,1,1,0<br>
+    bad,悪い,1,1,0</p>
+
+    <h4>frequencyのテーブル構成</h4>
+    <table class="border">
+        <tr><th>id</th><th>level</th></tr>
+        <tr><td>1</td><td>novice</td></tr>
+        <tr><td>2</td><td>intermediate</td></tr>
+        <tr><td>3</td><td>advanced</td></tr>
+    </table>
 </div>
 
 <div class="my-4">
