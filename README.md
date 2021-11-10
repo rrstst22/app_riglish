@@ -36,20 +36,19 @@ http://test
 ### 基本情報
 - 言語フレームワーク
     - HTML, CSS, JavaScript, PHP
-    - Vue.js, Laravel
+    - Vue.js 2.6.14, Laravel 8.68.1
 
 - 開発環境
     - Windows 10 Home
-    - docker(Apache2, Mariadb)
+    - docker (Apache 2.4.51, PHP 8.0.12, Mariadb 10.6.4)
 
 - デプロイ環境
     - CentOS 7
-    - Apache, Mariadb
+    - Apache 2.4.6, PHP 8.0.12, Mariadb 10.6.4
 
 - テスト
     - Chromeデベロッパーツール
     - PHPUnit
-
 
 ### 使用技術
 
@@ -62,4 +61,4 @@ http://test
 
 ### ER図
 
-![message-erd](https://user-images.githubusercontent.com/92190851/140932486-ca90c51e-14e9-4a10-8a64-30b4cb47d8b1.png)
+![Riglish](https://user-images.githubusercontent.com/92190851/141145733-79b2cec0-49d5-4010-bf5c-e694d73f3a5f.png)
