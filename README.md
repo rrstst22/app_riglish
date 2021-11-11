@@ -1,5 +1,7 @@
 # Riglish
 
+英語の単語テストが可能です。
+
 ## :globe_with_meridians:URL
 http://test
 
@@ -12,6 +14,11 @@ http://test
 1. 難易度を選択し、テスト開始
 2. 上部に表示される英単語の日本語訳を下の選択肢から選択
 3. 5問回答後、結果画面にて成績を確認
+
+### 機能
+- 難易度選択
+- CSV入力
+- PDF出力
 
 ### 特徴
 
@@ -45,8 +52,7 @@ http://test
 
 - 非同期通信Ajax（Vue.js）
 - Vue Router (Vue.js)
-- 親子コンポーネント間の受け渡し（Vue.js）
-- テーブル作成、挿入、更新、結合（Laravel）
+- テーブル参照、作成、挿入、削除、結合（Laravel）
 - ファイル入出力（SplFileObject, Laravel-dompdf）
 - カウントダウン（CSS, Vue.js）
 
