@@ -1,7 +1,5 @@
 # Riglish
 
-画像
-
 ## :globe_with_meridians:URL
 http://test
 
@@ -15,18 +13,11 @@ http://test
 2. 上部に表示される英単語の日本語訳を下の選択肢から選択
 3. 5問回答後、結果画面にて成績を確認
 
-### 機能
-
-- 難易度によって出題単語を変更
-- ランダムな問題の組み合わせ
-- カウントダウン機能
-- 単語CSV登録（管理者のみ）
-- CSV出力
-
 ### 特徴
 
 - Vue Router を使用したスピーディーな画面遷移
 - CSVにて問題の追加可能
+- テスト結果のPDF出力可能
 
 <br>
 <br>
@@ -34,7 +25,7 @@ http://test
 ## :page_facing_up:技術仕様
 
 ### 基本情報
-- 言語フレームワーク
+- 言語、フレームワーク
     - HTML, CSS, JavaScript, PHP
     - Vue.js 2.6.14, Laravel 8.68.1
 
@@ -56,9 +47,9 @@ http://test
 - Vue Router (Vue.js)
 - 親子コンポーネント間の受け渡し（Vue.js）
 - テーブル作成、挿入、更新、結合（Laravel）
-- ファイル入出力（Laravel）
+- ファイル入出力（SplFileObject, Laravel-dompdf）
 - カウントダウン（CSS, Vue.js）
 
 ### ER図
 
-![Riglish](https://user-images.githubusercontent.com/92190851/141145733-79b2cec0-49d5-4010-bf5c-e694d73f3a5f.png)
+![Riglish](https://user-images.githubusercontent.com/92190851/141318324-0a397457-3b48-4255-9689-2a6151ebf8b1.png)
