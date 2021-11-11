@@ -52,7 +52,7 @@ http://test
 
 - 非同期通信Ajax（Vue.js）
 - Vue Router (Vue.js)
-- テーブル参照、作成、挿入、削除、結合（Laravel）
+- データ取得、作成、更新、削除、結合（Laravel）
 - ファイル入出力（SplFileObject, Laravel-dompdf）
 - カウントダウン（CSS, Vue.js）
 
