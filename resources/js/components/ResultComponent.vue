@@ -17,8 +17,12 @@
             <!-- レコード内容出力 -->
             <tr v-for="(word, index) in words" v-bind:key="index" class="score-list">
                 <td>{{word.en}}</td><td>{{word.jp}}</td><td>{{word.result}}</td>
-            </tr>     
+            </tr>   
         </table>
+        <form action="pdf" method="get" class="my-3 text-right" target=”_blank”>
+            <input type="hidden" name="record_id" v-bind:value=record_id>
+            <button class="btn btn-primary">PDF出力</button>
+        </form>
     </div>
 </div>
 </template>
@@ -77,10 +81,6 @@
     }
 </script>
 <style scoped>
-ul {
-  list-style: none;
-  padding-left: 0;
-}
 .score-sheet {
     background: #fff;
     padding: 50px;
@@ -104,11 +104,5 @@ th {
   font-size: .875rem;
   color: #666;
   background: #eee;
-}
-img {
-  width: 80px;
-  display: block;
-  margin: 0 auto;
-  margin-bottom: .5rem;
 }
 </style>
