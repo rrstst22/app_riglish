@@ -2378,6 +2378,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     record_id: {
@@ -7038,7 +7042,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nul[data-v-057ebc76] {\n  list-style: none;\n  padding-left: 0;\n}\n.score-sheet[data-v-057ebc76] {\n    background: #fff;\n    padding: 50px;\n}\n.score-list[data-v-057ebc76] {\n    margin: 50px 0px;\n    border-bottom: 1px solid black;\n}\ntable[data-v-057ebc76] {\n  border-collapse: collapse;\n  width: 100%;\n}\nth[data-v-057ebc76],\ntd[data-v-057ebc76] {\n  padding: 1rem 2rem;\n  text-align: center;\n  border-bottom: 1px solid #ddd;\n}\nth[data-v-057ebc76] {\n  font-weight: normal;\n  font-size: .875rem;\n  color: #666;\n  background: #eee;\n}\nimg[data-v-057ebc76] {\n  width: 80px;\n  display: block;\n  margin: 0 auto;\n  margin-bottom: .5rem;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.score-sheet[data-v-057ebc76] {\n    background: #fff;\n    padding: 50px;\n}\n.score-list[data-v-057ebc76] {\n    margin: 50px 0px;\n    border-bottom: 1px solid black;\n}\ntable[data-v-057ebc76] {\n  border-collapse: collapse;\n  width: 100%;\n}\nth[data-v-057ebc76],\ntd[data-v-057ebc76] {\n  padding: 1rem 2rem;\n  text-align: center;\n  border-bottom: 1px solid #ddd;\n}\nth[data-v-057ebc76] {\n  font-weight: normal;\n  font-size: .875rem;\n  color: #666;\n  background: #eee;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -39087,6 +39091,22 @@ var render = function () {
           }),
         ],
         2
+      ),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          staticClass: "my-3 text-right",
+          attrs: { action: "pdf", method: "get", target: "”_blank”" },
+        },
+        [
+          _c("input", {
+            attrs: { type: "hidden", name: "record_id" },
+            domProps: { value: _vm.record_id },
+          }),
+          _vm._v(" "),
+          _c("button", { staticClass: "btn btn-primary" }, [_vm._v("PDF出力")]),
+        ]
       ),
     ]),
   ])

@@ -39,3 +39,6 @@ Route::get('vue/create-record', [App\Http\Controllers\WordsController::class, 'c
 Route::post('vue/update-record', [App\Http\Controllers\WordsController::class, 'updateRecord']);
 Route::post('vue/save-result', [App\Http\Controllers\WordsController::class, 'saveResult']);
 Route::get('vue/show-record', [App\Http\Controllers\WordsController::class, 'showRecord']);
+
+//PDF
+Route::get('pdf', [App\Http\Controllers\PDFController::class, 'index']);
