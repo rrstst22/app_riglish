@@ -36,11 +36,11 @@
         <main class="py-4">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-9 my-2">
                         @yield('content')
                     </div>
-                    <div class="col-md-3">
-                        <div class="index">
+                    <div class="col-md-3 my-2">
+                        <div class="index text-center">
                             <img src="{{ asset('images/board.png') }}" alt="board">
                         </div>
                     </div>

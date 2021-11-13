@@ -1,12 +1,12 @@
 .logo-box {
-    background: blue;
+    background: #4169e1;
     color: green;
-    font-size: 1.5rem;
-    height: 100px;
+    font-size: 1.2rem;
+    height: 70px;
 }
 
 .logo {
-    padding: 28px;
+    padding: 20px;
 }
 
 .controller {

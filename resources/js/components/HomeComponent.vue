@@ -1,20 +1,20 @@
 <template>
 <div class="level-box">
-    <div class="text-center py-2">
-        <span class="border p-2">難易度選択</span>
+    <div class="text-center my-3">
+        <span>難易度選択</span>
     </div>
     <div class="row">
         <div class="col-md-4 level novice text-center">
             <h2 class="my-4">初級</h2>
             <div class="my-4">
-                中高で習う英単語を出題します。
+                中、高で習う英単語を出題します。
             </div>
             <button type="button" class="start-button" v-on:click="startQuestions(1)">選択</button>
         </div>
         <div class="col-md-4 level intermediate text-center">
             <h2 class="my-4">中級</h2>
             <div class="my-4">
-                高校、大学で習う英単語を出題します。
+                高、大で習う英単語を出題します。
             </div>
             <button type="button" class="start-button" v-on:click="startQuestions(2)">選択</button>
         </div>

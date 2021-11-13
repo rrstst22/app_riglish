@@ -37,13 +37,6 @@
     }
 </script>
 <style scoped>
-body{
-    margin: 0;
-    padding: 0;
-}
-p{
-    padding: 10px;
-}
 .container{
     position:relative;
     width: 100%;
