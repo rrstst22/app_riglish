@@ -9,24 +9,24 @@ export default new Router({
     mode: "history",
     routes: [
         {
-            path: "/riglish/public/",
+            path: "/",
             name: "home",
             component: home,
         },
         {
-            path: "/riglish/public/countdown",
+            path: "/countdown",
             name: "countdown",
             component: countdown,
             props: true
         },
         {
-            path: "/riglish/public/question",
+            path: "/question",
             name: "question",
             component: question,
             props: true
         },
         {
-            path: "/riglish/public/result",
+            path: "/result",
             name: "result",
             component: result,
             props: true

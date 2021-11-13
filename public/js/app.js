@@ -2564,21 +2564,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
   mode: "history",
   routes: [{
-    path: "/riglish/public/",
+    path: "/",
     name: "home",
     component: _components_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }, {
-    path: "/riglish/public/countdown",
+    path: "/countdown",
     name: "countdown",
     component: _components_CountDownComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     props: true
   }, {
-    path: "/riglish/public/question",
+    path: "/question",
     name: "question",
     component: _components_QuestionComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     props: true
   }, {
-    path: "/riglish/public/result",
+    path: "/result",
     name: "result",
     component: _components_ResultComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     props: true

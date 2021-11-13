@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LevelsTableSeeder::class,
             FrequencyTableSeeder::class,
-            WordsTableSeeder::class,
+            // WordsTableSeeder::class,
             UsersTableSeeder::class,
         ]);
     }

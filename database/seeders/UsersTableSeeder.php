@@ -14,6 +14,12 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->count(10)->create();
+        User::insert([
+            [
+              'name' => 'user1',
+              'email' => 'user1@user1',
+              'password' => bcrypt('user1'),
+            ],
+        ]);
     }
 }

@@ -8,6 +8,16 @@ use App\Models\Word;
 
 class CsvImportController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function index()
+    {
+        return view('importcsv');
+    }
+
     public function import(Request $request)
     {
         setlocale(LC_ALL, 'ja_JP.UTF-8');

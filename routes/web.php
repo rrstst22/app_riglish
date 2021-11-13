@@ -17,20 +17,18 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/question', function () {
+Route::get('question', function () {
     return view('index');
 });
 
-Route::get('/result', function () {
+Route::get('result', function () {
     return view('index');
-});
-
-Route::get('/import', function () {
-    return view('importcsv');
 });
 
 Auth::routes();
 
+//CSV
+Route::get('import', [App\Http\Controllers\CsvImportController::class, 'index']);
 Route::post('csv/import', [App\Http\Controllers\CsvImportController::class, 'import']);
 
 //Vue
