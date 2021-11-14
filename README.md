@@ -3,7 +3,7 @@
 英語の単語テストが可能です。
 
 ## :globe_with_meridians:URL
-http://test
+http://riupad-dev.com:8081
 
 <br>
 <br>
@@ -12,8 +12,13 @@ http://test
 
 ### 使い方
 1. 難易度を選択し、テスト開始
+<img src="https://user-images.githubusercontent.com/92190851/141678581-ee241131-cd86-47c4-9de6-985b2b2d31ba.png" width="700px">
+
 2. 上部に表示される英単語の日本語訳を下の選択肢から選択
-3. 5問回答後、結果画面にて成績を確認
+<img src="https://user-images.githubusercontent.com/92190851/141678599-14948d7a-5374-44ac-955f-a3160914b26b.png" width="700px">
+
+3. 回答後、結果画面にて成績を確認
+<img src="https://user-images.githubusercontent.com/92190851/141678612-d6b8a0d7-d91c-40f6-b198-8c3bb855db83.png" width="700px">
 
 ### 機能
 - 難易度選択
@@ -58,4 +63,4 @@ http://test
 
 ### ER図
 
-![Riglish](https://user-images.githubusercontent.com/92190851/141318324-0a397457-3b48-4255-9689-2a6151ebf8b1.png)
+<img src="https://user-images.githubusercontent.com/92190851/141318324-0a397457-3b48-4255-9689-2a6151ebf8b1.png" width="700px">
