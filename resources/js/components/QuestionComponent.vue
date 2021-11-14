@@ -35,7 +35,7 @@
                 words: {0: {en: "　"}}, //初期表示（警告、CSS崩れ回避）
                 result: "",
                 step: 0, //何問目？
-                total: 5, //問題数
+                total: 3, //問題数
                 score: 0,
                 timer: 10,
                 update_timer: null,

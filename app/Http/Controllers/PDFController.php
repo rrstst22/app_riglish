@@ -8,7 +8,8 @@ use PDF;
 
 class PDFController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request)
+    {
 
         $words = Word_record::where('record_id', $request->record_id)
         ->join('words','word_records.word_id','=','words.id')

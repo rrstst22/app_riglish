@@ -1,3 +1,18 @@
+/* ベースの上書き */
+body {
+    background-color: #fff !important;
+}
+
+a {
+    color: #fff !important;
+}
+
+a:hover {
+    color: #fff !important;
+    text-decoration: none !important;
+    opacity: .4;
+}
+
 .logo-box {
     background: #4169e1;
     color: green;
@@ -23,8 +38,8 @@
 }
 
 .icon {
-    padding: 20px 5px;
-    font-size: 2rem;
+    padding: 18px 5px;
+    font-size: 1.7rem;
 }
 
 .index {

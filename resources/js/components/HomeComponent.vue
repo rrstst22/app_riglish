@@ -7,21 +7,24 @@
         <div class="col-md-4 level novice text-center">
             <h2 class="my-4">初級</h2>
             <div class="my-4">
-                中、高で習う英単語を出題します。
+                中、高で習う英単語を出題します。<br>
+                ※全3問です。
             </div>
             <button type="button" class="start-button" v-on:click="startQuestions(1)">選択</button>
         </div>
         <div class="col-md-4 level intermediate text-center">
             <h2 class="my-4">中級</h2>
             <div class="my-4">
-                高、大で習う英単語を出題します。
+                高、大で習う英単語を出題します。<br>
+                ※全3問です。
             </div>
             <button type="button" class="start-button" v-on:click="startQuestions(2)">選択</button>
         </div>
         <div class="col-md-4 level advanced text-center">
             <h2 class="my-4">上級</h2>
             <div class="my-4">
-                専門的な英単語などを出題します。
+                専門的な英単語などを出題します。<br>
+                ※全3問です。
             </div> 
             <button type="button" class="start-button" v-on:click="startQuestions(3)">選択</button>
         </div>
