@@ -21,7 +21,7 @@
 <body>
     <div id="app">
         <div class="logo-box text-center">
-            <div class="logo"><a href="{{ url('/') }}">Webエンジニアとして</a></div>
+            <div class="logo"><a href="{{ url('/') }}">インフラエンジニアとして</a></div>
         </div>
 
         <div class="arrow" v-on:click='on_arrow=!on_arrow'>
