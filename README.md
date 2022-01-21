@@ -3,7 +3,7 @@
 英語の単語テストが可能です。
 
 ## :globe_with_meridians:URL
-http://riupad-dev.com:8081
+非公開
 
 <br>
 <br>
